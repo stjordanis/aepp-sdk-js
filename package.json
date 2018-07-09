@@ -4,7 +4,7 @@
   "description": "SDK for the æternity blockchain",
   "main": "dist/aepp-sdk.js",
   "browser": "dist/aepp-sdk.browser.js",
-  "module": "src/index.js",
+  "module": "es/index.js",
   "sideEffects": false,
   "scripts": {
     "build": "webpack -p",
@@ -33,6 +33,7 @@
     "rlp": "^2.0.0",
     "tweetnacl": "^1.0.0",
     "url": "^0.11.0",
+    "uuid": "^3.3.2",
     "websocket": "^1.0.25"
   },
   "repository": {
