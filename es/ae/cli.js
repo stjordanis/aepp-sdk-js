@@ -15,36 +15,19 @@
  *  PERFORMANCE OF THIS SOFTWARE.
  */
 
-import Ae from './ae'
-import * as Crypto from './utils/crypto'
-import Chain from './chain'
-import EpochChain from './chain/epoch'
-import Tx from './tx'
-import EpochTx from './tx/epoch'
-import JsTx from './tx/js'
-import Account from './account'
-import {PostMessageAccount, PostMessageAccountReceiver} from './account/post-message'
-import MemoryAccount from './account/memory'
+import Ae from '../ae'
+import Account from '../account/memory'
+import Chain from '../chain/epoch'
+import Tx from '../tx/epoch'
+import JsTx from '../tx/js'
 import Aens from './aens'
 import Contract from './contract'
+import {envKeypair} from '../utils/crypto'
 
-const Wallet = Ae.compose(EpochChain, EpochTx, JsTx, MemoryAccount, PostMessageAccountReceiver)
-const Aepp = Ae.compose(EpochChain, EpochTx, JsTx, PostMessageAccount, Contract, Aens)
+const Cli = Ae.compose(Account, Chain, Tx, JsTx, Aens, Contract, {
+  init ({process}) {
+    this.setKeypair(envKeypair(process.env))
+  }
+})
 
-export default Ae
-
-export {
-  Wallet,
-  Aepp,
-  Crypto,
-  Chain,
-  EpochChain,
-  Tx,
-  EpochTx,
-  Account,
-  PostMessageAccount,
-  PostMessageAccountReceiver,
-  MemoryAccount,
-  Aens,
-  Contract
-}
+export default Cli

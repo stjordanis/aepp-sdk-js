@@ -20,7 +20,7 @@ import Ae from '../../src/ae'
 import Chain from '../../src/chain/epoch'
 import Tx from '../../src/tx/epoch'
 import JsTx from '../../src/tx/js'
-import Account from '../../src/account/memory'
+import Accounts from '../../src/accounts/memory'
 import Aens from '../../src/aens'
 import Contract from '../../src/contract'
 import * as Crypto from '../../src/utils/crypto'
@@ -30,7 +30,7 @@ const internalUrl = process.env.TEST_INTERNAL_URL || 'http://localhost:3113'
 const masterAccount = Crypto.envKeypair(process.env)
 const accounts = Array(3).fill().map(() => Crypto.generateKeyPair())
 
-const BaseAe = Ae.compose(Chain, Tx, JsTx, Account, Aens, Contract, {
+const BaseAe = Ae.compose(Chain, Tx, JsTx, Accounts, Aens, Contract, {
   deepProps: {Swagger: {defaults: {debug: !!process.env['DEBUG']}}},
   props: {url, internalUrl}
 })
